@@ -16,6 +16,9 @@ public static class Startup
         var openAiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")!;
         var geminiKey = Environment.GetEnvironmentVariable("GEMINI_API_KEY")!;
         var claudeKey = Environment.GetEnvironmentVariable("CLAUDE_API_KEY")!;
+        var azureOpenAiKey = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY");
+        var azureOpenAiEndpoint = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT");
+        var azureOpenAiDeployment = Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT");
 
 
         builder.Services.AddLogging(logging => logging.AddConsole().SetMinimumLevel(LogLevel.Information));
@@ -30,6 +33,12 @@ public static class Startup
                 "openai" => new OpenAI.Chat.ChatClient(
                                 string.IsNullOrWhiteSpace(model) ? "gpt-4.1-mini" : model,
                                 openAiKey).AsIChatClient(),
+
+                "azure" => new Azure.AI.OpenAI.AzureOpenAIClient(
+                                new Uri(azureOpenAiEndpoint!),
+                                new System.ClientModel.ApiKeyCredential(azureOpenAiKey!))
+                                .GetChatClient(string.IsNullOrWhiteSpace(model) ? azureOpenAiDeployment! : model)
+                                .AsIChatClient(),
 
                 "gemini" => new GeminiChatClient(new GeminiDotnet.GeminiClientOptions { ApiKey = geminiKey, ModelId = model, ApiVersion = GeminiApiVersions.V1Beta }),
 

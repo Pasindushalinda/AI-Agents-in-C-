@@ -1,0 +1,73 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug with Azure OpenAI",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/bin/Debug/net9.0/ConsoleAgent.dll",
+            "args": [
+                "--provider",
+                "azure",
+                "--model",
+                "gpt-4.1-nano"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Debug with OpenAI",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/bin/Debug/net9.0/ConsoleAgent.dll",
+            "args": [
+                "--provider",
+                "openai",
+                "--model",
+                "gpt-4.1-mini"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Debug with Gemini",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/bin/Debug/net9.0/ConsoleAgent.dll",
+            "args": [
+                "--provider",
+                "gemini",
+                "--model",
+                "gemini-2.0-flash-exp"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Debug with Claude",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/bin/Debug/net9.0/ConsoleAgent.dll",
+            "args": [
+                "--provider",
+                "claude",
+                "--model",
+                "claude-3-5-sonnet-20241022"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
